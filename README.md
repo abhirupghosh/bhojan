@@ -1,5 +1,6 @@
 ## Bhojan
-# _submission for HackGSU Fall 2019 with a team of 2_
+_Submission for HackGSU Fall 2019 with a team of 2
+_Winner: Best use of Microsoft Azure
 # Inspiration
 Our application has two major use cases: 
 _Faster service at restaurants_
