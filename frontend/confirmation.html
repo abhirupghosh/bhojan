@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<h1 id = "bigTextEvaluationStudents"></h1>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<head>
+
+
+    <head>
+        <meta charset="utf-8">
+        <title>Confirmation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    </head>
+<div id ="once"></div>
+  <table style="width:100%" id="ex-table">
+        <tr id="tr">
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+
+
+    </table>
+
+    <script>
+        (function () {
+            const config = {
+                apiKey: "AIzaSyDwDIQDNxvycUyLx_EjoFP9LfZ0NPCQUwM",
+                authDomain: "test-81253.firebaseapp.com",
+                databaseURL: "https://test-81253.firebaseio.com",
+                projectId: "test-81253",
+                storageBucket: "test-81253.appspot.com",
+                messagingSenderId: "734048204004",
+                appId: "1:734048204004:web:9761e60730f5996e8128f1",
+                measurementId: "G-WBT2FNC77D"
+            };
+
+            firebase.initializeApp(config);
+        var database = firebase.database().ref();
+        var ref = firebase.database();
+        database.on('value', function (snapshot) {
+            if (snapshot.exists()) {
+               console.log(snapshot.val());
+                var str = "nakkoow ";
+            
+                    //console.log(val)
+                    var val = snapshot.val();
+                    if (val.status =='confirm') {
+                        str = "Order Confirmed!";
+                        var int;
+                         //var database = firebase.database();
+                        ref.ref('food').once('value', function (snapshot) {
+                    if (snapshot.exists()) {
+                var content = '';
+                snapshot.forEach(function (data) {
+                    var val = data.val();
+                    if(val.quantity !=0){
+                    content += '<tr>';
+                    content += '<td>' + val.item + '</td>';
+                    content += '<td>' + val.price + '</td>';
+                    content += '<td>' + val.quantity + '</td>';
+
+                    content += '</tr>';
+                    //int += Number(val.price)*Number(val.quantity);
+                    //console.log(int)
+}
+                });
+                $('#ex-table').append(content);
+            }
+        });
+                    }
+                    else if (val.status =='qtyError') {
+                        str = "Inventory Error";
+                    }
+                    else if (val.status =='Error') {
+                        str = "Fucked Scenes";
+                    }
+                    //document.appendChild(str);
+                                    $('#once').append(str);
+                                $('#once').append(int);
+
+
+                
+            }
+        });
+    
+            const bigTextEvaluationStudents = document.getElementById('bigTextEvaluationStudents');
+            const dbBigTextEvaluationStudentsRef = firebase.database().ref().child('price');
+            dbBigTextEvaluationStudentsRef.on('value', snap => bigTextEvaluationStudents.innerText = snap.val());
+
+            var table = document.querySelector('#table1 tbody');
+            const dbEvaluationStudentsRef = firebase.database().ref().child('name');
+            dbEvaluationStudentsRef.on('value', snap => {
+                while (table.hasChildNodes()) {
+                    table.removeChild(table.firstChild);
+                }
+
+                var students = snap.val();
+                for (var i in students) {
+                    var row = table.insertRow(-1);
+                    for (var j in students[i]) {
+                        cell = row.insertCell(-1);
+                        cell.innerHTML = students[i][j];
+                    }
+                }
+            });
+        }());
+    </script>
+
+
+    <br><br>
+</html>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDwDIQDNxvycUyLx_EjoFP9LfZ0NPCQUwM",
+    authDomain: "test-81253.firebaseapp.com",
+    databaseURL: "https://test-81253.firebaseio.com",
+    projectId: "test-81253",
+    storageBucket: "test-81253.appspot.com",
+    messagingSenderId: "734048204004",
+    appId: "1:734048204004:web:4170071281ac575e8128f1",
+    measurementId: "G-VJQEFW5VTB"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>

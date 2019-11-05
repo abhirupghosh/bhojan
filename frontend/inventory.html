@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<!--<form id = "your_form">-->
+    <h1 id="bigTextEvaluationStudents"></h1>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<head>
+    <!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Inventory</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    </head>
+
+<style type="text/css"> input {
+     width: 10%;
+     height:40%;
+}</style>>
+
+    <script>
+        (function () {
+            const config = {
+                apiKey: "AIzaSyDwDIQDNxvycUyLx_EjoFP9LfZ0NPCQUwM",
+                authDomain: "test-81253.firebaseapp.com",
+                databaseURL: "https://test-81253.firebaseio.com",
+                projectId: "test-81253",
+                storageBucket: "test-81253.appspot.com",
+                messagingSenderId: "734048204004",
+                appId: "1:734048204004:web:9761e60730f5996e8128f1",
+                measurementId: "G-WBT2FNC77D"
+            };
+            firebase.initializeApp(config);
+            const bigTextEvaluationStudents = document.getElementById('bigTextEvaluationStudents');
+            var dbBigTextEvaluationStudentsRef = firebase.database().ref().child('price');
+           
+            dbBigTextEvaluationStudentsRef.on('value', snap => bigTextEvaluationStudents.innerText = snap.val());
+
+            var table = document.querySelector('#table1 tbody');
+            const dbEvaluationStudentsRef = firebase.database().ref().child('name');
+            dbEvaluationStudentsRef.on('value', snap => {
+
+
+                var students = snap.val();
+                for (var i in students) {
+                    var row = table.insertRow(-1);
+                    for (var j in students[i]) {
+                        cell = row.insertCell(-1);
+                        cell.innerHTML = students[i][j];
+                    }
+                }
+            });
+        }());
+    </script>
+
+    <table style="width:100%" id="ex-table">
+        <tr id="tr">
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+    </table>
+    <script>
+        var ind = 0;
+
+        var database = firebase.database();
+        database.ref('food').once('value', function (snapshot) {
+            if (snapshot.exists()) {
+                var content = '';
+
+                snapshot.forEach(function (data) {
+                    //console.log(val)
+                    var val = data.val();
+                    content += '<tr>';
+                    content += '<td>' + val.item + '</td>';
+                    content += '<td>' + val.price + '</td>';
+                    var x = "checkbox" + ind.toString();
+                
+                    
+                    
+                    
+            
+                    content += '<td> <input type ="text" value="0" id = text'+ind.toString()+ '> </td>';
+                    content += '</tr>'; 
+                    ind++;
+                    //console.log(val.key);
+                });
+                $('#ex-table').append(content);
+            }
+        });
+            function myFunction(){
+                //document.getElementById("text"+1.toString()).value
+    for(let i =0; i< ind; i++) {
+        //var input = document.getElementById((("text"+i).toString()));
+        console.log(document.getElementById("text"+i).value);
+        //console.log(getElementById("text1").value);
+       database.ref('food/' + i).update({
+
+    inventory : document.getElementById("text"+i).value
+  });
+    
+  }
+}
+
+
+</script>
+    <input type = "submit" value ="Submit" onclick="myFunction()">
+
+    
+</html>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDwDIQDNxvycUyLx_EjoFP9LfZ0NPCQUwM",
+    authDomain: "test-81253.firebaseapp.com",
+    databaseURL: "https://test-81253.firebaseio.com",
+    projectId: "test-81253",
+    storageBucket: "test-81253.appspot.com",
+    messagingSenderId: "734048204004",
+    appId: "1:734048204004:web:4170071281ac575e8128f1",
+    measurementId: "G-VJQEFW5VTB"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+</script>
+<script>
+    
+</script>
